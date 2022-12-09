@@ -1,9 +1,9 @@
-dp = {}
+dp = {1: 1}
 
 
 def countSteps(n):
     steps = 0
-    while n > 1:
+    while n >= 1:
         if n in dp:
             return dp[n] + steps
         if n % 2:
@@ -15,7 +15,7 @@ def countSteps(n):
     return steps
 
 
-r = 1000000
+r = 10000
 for i in range(1, r + 1):
     steps = countSteps(i)
     dp[i] = steps
