@@ -3,7 +3,7 @@ import math
 
 dp = {}
 
-r = 10
+r = 100000
 digits = list(range(1, 10))
 freq = [0]*len(digits)
 for i in range(1, r + 1):
@@ -20,7 +20,7 @@ for i in range(1, r + 1):
         freq[fd-1] += 1
         current[fd-1] += 1
         if n & 1:
-            n = (3 * n + 1) >> 1
+            n = (3 * n + 1) // 2
         else:
             n >>= 1
     freq[0] += 1

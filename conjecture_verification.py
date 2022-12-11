@@ -1,23 +1,31 @@
+import time
+import sys
+
 dp = {1: 1}
 
 
-def countSteps(n):
+def count_steps(n):
     steps = 0
     while n >= 1:
         if n in dp:
             return dp[n] + steps
-        if n % 2:
+        if n & 1:
             steps += 2
-            n = (3 * n + 1) // 2
+            n = (3 * n + 1) >> 1
         else:
             steps += 1
             n >>= 1
     return steps
 
 
-r = 10000
+start_time = time.time()
+
+r = 10000000
 for i in range(1, r + 1):
-    steps = countSteps(i)
+    steps = count_steps(i)
     dp[i] = steps
 
-print(dp)
+end_time = time.time()
+
+sys.stdout.write(str(dp))
+sys.stdout.write(f"\n\nTotal Execution Runtime: {end_time - start_time} sec")
