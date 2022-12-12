@@ -1,2 +1,87 @@
 # collatz-conjecture
-Research based around a simple yet fascinating repetitive piecewise function.
+> Research based around a simple yet fascinating, repetitive piecewise function.
+
+This repository contains multiple scripts that help explore and perform tests on numbers to try an prove the collatz-conjecture. I tried to optimize the scripts as best I could to be able to run more operations for testing, however, there is no discovered real way to test all numbers quickly.
+
+Since most scripts in the repository are built with Python 3.10, I would suggest using PyPy3 for faster run-times. <br>
+PyPy is a python compiler which compiles the python scripts and runs the compiled scripts making it as fast as any other low-level programming language like C.
+
+## Collatz Conjecture
+The simple piecewise function, caused such large commotion and has gone unsolved for over 8 decades. The simple 3x + 1 problem was rumored to be a Soviet trap designed to slow down American mathematics and science during the space race between the two nations. It was proven ot be effective because even after 8 decades, mathematicians are still working towards the problem by writing scripts to test numbers and catch any edge cases which break the conjecture.
+
+The piecewise function for the 3x+1 problem looks like this: <br>
+![image](https://user-images.githubusercontent.com/47650058/206938940-8da6ea25-0188-49b4-8b08-6e3061ecc753.png) <br>
+*If x is even, `f(x) = x/2`, but if x is odd, `f(x) = 3x+1`. This function is infinitely recursed upon to form a sequence of numbers.*
+
+*For Example: <br>
+f(3) = 10 -> <br>
+f(10) = 5 -> <br>
+f(5) = 16 -> <br>
+f(16) = 8 -> <br>
+f(8) = 4 -> <br>
+f(4) = 2 -> <br>
+f(2) = 1 -> <br>
+f(1) = 4 -> <br>
+...this then falls into a never-ending loop of `4 - 2 - 1`*
+
+### Definitions
+Dropping Time / Delay = Amount of steps to reach 1 from n in the sequence.
+Glide = Amount of steps to reach a number stricly less than n in the sequence.
+
+Convergent Sequence = The sequences reaches 1 eventually.
+Divergent Sequence = The sequence infinitely increases.
+Cyclic Sequence = The sequence never reaches 1 nor is it increasing towards infinity.
+
+### Conjecture Verification
+The Collatz conjecture states that the orbit of every number under function f eventually reaches 1. This has been proven to be true for the first 2^68 whole numbers after computational testing and verification. Despite being a large number, this covers almost nothing on the real number line and it is not sufficient to prove the conjecture entirely.
+
+I have written some scripts for Collatz Conjecture Verification in Python3 and C++ to test some numbers on my own.
+
+`conjecture_verification.py` and `conjectureVerification.cpp` is just optimized brute-forcing towards the problem with a little bit of Dynamic Programming involved since we use the dropping time/delay (*amount of steps to reach 1 from n*) of previous values to find the dropping time of our current value. For Example:
+Lets say D(n) = the dropping time for the value of n. <br>
+When we are calculating for D(4), we can find the next number in the sequence which is `n=2`. If D(2) has already been calculated, we can correctly say that D(4) is equal to `D(2) + C`, `C` being the amount of steps to get from n to that already calculated value.
+
+`convergence_verification.py` uses a much more optimized algorithm which only verifies whether numbers are convergent. This removes the necessity to calculate each number's dropping time. The algorithm also uses sieves (sliding windows) to check smaller ranges over time and build a list of numbers with abnormally large glide values instead of checking the dropping times of all numbers in the sieve. With the threshold limit of 2^8, and a sieve size of 2^20, the convergence algorithm was able to successfully verifiy 2^22 numbers in `3.02` seconds with normal Python 3.10 compilers. Using this algorithm with C++ or PyPy3 compilers could reduce the runtime significantly.
+
+### Graphing Visualizations
+`benfords_law.py` attempts to grab all the frequencies of the first digits in the step numbers and adds them to a histogram. For the first 100000 numbers, if you track the frequencies of the first digits of numbers in each step and draw a histogram we see a unique shape. 1 being the most frequent and 9 being the least frequent and there's an exponential curve in between. This curvature is more commonly known as Benford's Law and can be found in many use cases in our daily lives. *Sorry for the weird formatting! I couldn't figure out how to fix it...* <br>
+![image](https://user-images.githubusercontent.com/47650058/206950303-edd5a2ba-06e4-458f-ab60-fcc2d77a09d0.png) <br>
+
+`delay_graph.py` graphs the relation between n (x-axis) and n's delay (y-axis). This relationship creates a weird graph which has no distinctive shape and we can't express their relation with just 1 simple math expression because of it's complexity.
+![image](https://user-images.githubusercontent.com/47650058/207048613-27a3a445-303c-4211-9a0e-596b62153d00.png)
+
+`glide_graph.py` graphs the relation between n (x-axis) and n's glide (y-axis). This relationship shows a very frequent pattern of occuring between powers of 2. A glide of 1 shows up for every even number since it's first move returns a step that is lower than itself, so it occurs every 2^1. Similarly, a glide value of 3 shows up in a pattern of every 2^2. A glide value of 6 shows up in a pattern that occurs every 2^4 and this pattern continues on forever with the glide values.
+![image](https://user-images.githubusercontent.com/47650058/207049744-2e985e6e-e2a3-4d9f-be53-3e918eca870d.png)
+
+### Glide Patterns
+We notice the pattern in `glide_graph.py` script but the steps in the glide seem almost random. It jumps from 1 to 3 to 6 to 8 to 11 and so on. So, I decided to create a table of every glide value of n (within a range of 0-10000) in order to find any patterns with the glide values. So, I recursed through all numbers in the range and added their glide values to a set (to remove duplicates). After adding all glide values to a set, I sorted the set and indexed every glide values from 1-10000. I found a noticeable pattern in the sorted set of glide values lying within the differences between each glide. The differences between each glide formed a `2-3-2-3-2-3-3-2-3-2-3-3` pattern which is also commonly known as a 12-layer octave pattern (found in piano keys). This proves that all glide values must be finite. For a second, you might think "the conjecture hasn't been proven because even though all glide values are finite the glide step could be divergent." But in fact, that is incorrect because if the number at the glide step is divergent, then the glide for that number is infinite which can be proven to be false. If this does actually prove that real numbers can't be divergent, there is still the possibility of a number being cyclic so this doesn't prove the collatz conjecture. The glide sequence has also been compiled down to this single function: `f(n+1) = floor(1 + n + n*log(3)/log(2))`
+
+### 
+
+## Installation
+Some scripts such as `delay_graph.py`, `glide_graph.py` and `benfords_law.py` use the matplotlib package for the graphing user interface which is very useful and simple to use.
+
+To be able to use the `matplotlib` library with the python scripts, you have to install the package. This can be done through a package installer with the `matplotlib` package available like pip. Learn how to install a stable version of [pip](https://pip.pypa.io/en/stable/installation/). <br>
+You can run either of the following commands to install the `matplotlib` package onto your virtual environment (venv): <br>
+```console
+$ pip install matplotlib
+$ python -m pip install matplotlib
+$ python3 -m pip install matplotlib
+```
+If you are using a Python version that comes with your Linux distributation, you can also install the `matplotlib` package via your distribution's package manager.
+```console
+$ sudo apt-get install python3-matplotlib  # Debian / Ubuntu
+$ sudo dnf install python3-matplotlib  # Fedora
+$ sudo yum install python3-matplotlib  # Red Hat
+$ sudo pacman -S python-matplotlib  # Arch Linux
+```
+
+## Sources
+http://www.ericr.nl/wondrous/
+https://oeis.org/A122437
+https://youtu.be/094y1Z2wpJg
+https://youtu.be/i4OTNm7bRP8
+
+----
+
+*Created by BooleanCube :]*
