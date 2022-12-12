@@ -25,12 +25,20 @@ f(1) = 4 -> <br>
 ...this then falls into a never-ending loop of `4 - 2 - 1`*
 
 ### Definitions
-Dropping Time / Delay = Amount of steps to reach 1 from n in the sequence.
-Glide = Amount of steps to reach a number stricly less than n in the sequence.
+Dropping Time / Delay = Amount of steps to reach 1 from n in the sequence. <br>
+Glide = Amount of steps to reach a number stricly less than n in the sequence. <br>
 
-Convergent Sequence = The sequences reaches 1 eventually.
-Divergent Sequence = The sequence infinitely increases.
-Cyclic Sequence = The sequence never reaches 1 nor is it increasing towards infinity.
+Convergent Sequence = The sequences reaches 1 eventually. <br>
+Divergent Sequence = The sequence infinitely increases. <br>
+Cyclic Sequence = The sequence never reaches 1 nor is it increasing towards infinity. <br>
+
+### Operations
+`& (Bitwise AND Operation)` = Performs AND Operation over the binary expression of 2 base-10 integers. (`101001 & 1 = 1`) <br>
+`>> (Bitwise Right Shift Operation)` = Right shifts the binary expression of a base-10 integer. (`10110 >> 2 = 101`) <br>
+`n & 1` => Determines whether n is even or odd. If `n&1 = 0`, n is even, but if `n&1 = 1`, n is odd. <br>
+`n >> 1` => Basically divides n by 2. By removing the last digit in the binary expression, all bits were shifted down by 1 and divided the value of each bit by 2. This divides the value of the whole number by 2.
+
+*The main reason I used these operations rather than traditional and conventional operations was for faster runtime speeds.*
 
 ### Conjecture Verification
 The Collatz conjecture states that the orbit of every number under function f eventually reaches 1. This has been proven to be true for the first 2^68 whole numbers after computational testing and verification. Despite being a large number, this covers almost nothing on the real number line and it is not sufficient to prove the conjecture entirely.
@@ -56,7 +64,20 @@ When we are calculating for D(4), we can find the next number in the sequence wh
 ### Glide Patterns
 We notice the pattern in `glide_graph.py` script but the steps in the glide seem almost random. It jumps from 1 to 3 to 6 to 8 to 11 and so on. So, I decided to create a table of every glide value of n (within a range of 0-10000) in order to find any patterns with the glide values. So, I recursed through all numbers in the range and added their glide values to a set (to remove duplicates). After adding all glide values to a set, I sorted the set and indexed every glide values from 1-10000. I found a noticeable pattern in the sorted set of glide values lying within the differences between each glide. The differences between each glide formed a `2-3-2-3-2-3-3-2-3-2-3-3` pattern which is also commonly known as a 12-layer octave pattern (found in piano keys). This proves that all glide values must be finite. For a second, you might think "the conjecture hasn't been proven because even though all glide values are finite the glide step could be divergent." But in fact, that is incorrect because if the number at the glide step is divergent, then the glide for that number is infinite which can be proven to be false. If this does actually prove that real numbers can't be divergent, there is still the possibility of a number being cyclic so this doesn't prove the collatz conjecture. The glide sequence has also been compiled down to this single function: `f(n+1) = floor(1 + n + n*log(3)/log(2))`
 
-### 
+### Calculator
+If you want to test numbers of your own quickly, the `collatz_calculator.py` script is what you are looking for. You can calculate and measure information about any number (as large as you want) rapidly. Given a number through input, it will calculate the numbers, delay, glide, residue, strength, level, shape of its path, etc. <br>
+*The number is most likely divergent if the calculator takes more than 3 seconds to measure all parameters for a number.* <br>
+![image](https://user-images.githubusercontent.com/47650058/207081206-84279d2d-543f-4943-b096-f5796f34c024.png)
+
+### Terras Theorem
+**Statement**: Let M be a positive integer. Let D(M) be the fraction of numbers < M that do not have finite stopping time. Then the limit of D(M) for M → ∞ is equal to 0. <br>
+Essentially, the Terras Theorem states that the Delay Record as n approaches infinity decreases towards 0.
+`terras_theorem.py` returns a number's glide value and the parity vector of its stepping sequence. You can then check these with the [Delay Records Table](http://www.ericr.nl/wondrous/delrecs.html) that has already been compiled for large numbers and find the Delay Record.
+
+### Arithmetic Mean
+`arithmetic_mean.py` generates all points for each step in the number sequence from n with the x-axis being the step count and the y-axis being the value of the number in the sequence at that step count. <br>
+For example, if `n=4` the points generated would be: `(1,4), (2,2), (3,1)` <br>
+With these coordinates, we would like to find the average amount of decrease or increase between each step that is taken in the sequence to see if we can prove that every number is bound to decrease. To find the average amount of increase/decrease between each step, we draw a line of best fit for all coordinates in each step and then find the slope of that line. We have to find the slope of this line for multiple numbers to find the average over all values. For the first 10000 natural numbers, the average amount of decrease is calculated to be roughly about `-0.13792251144898038`
 
 ## Installation
 Some scripts such as `delay_graph.py`, `glide_graph.py` and `benfords_law.py` use the matplotlib package for the graphing user interface which is very useful and simple to use.
@@ -77,10 +98,10 @@ $ sudo pacman -S python-matplotlib  # Arch Linux
 ```
 
 ## Sources
-http://www.ericr.nl/wondrous/
-https://oeis.org/A122437
-https://youtu.be/094y1Z2wpJg
-https://youtu.be/i4OTNm7bRP8
+http://www.ericr.nl/wondrous/ <br>
+https://oeis.org/A122437 <br>
+https://youtu.be/094y1Z2wpJg <br>
+https://youtu.be/i4OTNm7bRP8 <br>
 
 ----
 
