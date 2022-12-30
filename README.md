@@ -1,7 +1,7 @@
 # collatz-conjecture
 > Research based around a simple yet fascinating, repetitive piecewise function.
 
-This repository contains multiple scripts that help explore and perform tests on numbers to try an prove the collatz-conjecture. I tried to optimize the scripts as best I could to be able to run more operations for testing, however, there is no discovered real way to test all numbers quickly.
+This repository contains multiple scripts that help explore and perform tests on numbers to try and prove the collatz-conjecture. I tried to optimize the scripts as best I could to be able to run more operations for testing, however, there is no discovered real way to test all numbers quickly.
 
 Since most scripts in the repository are built with Python 3.10, I would suggest using PyPy3 for faster run-times. <br>
 PyPy is a python compiler which compiles the python scripts and runs the compiled scripts making it as fast as any other low-level programming language like C.
