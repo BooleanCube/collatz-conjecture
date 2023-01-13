@@ -55,10 +55,10 @@ When we are calculating for D(4), we can find the next number in the sequence wh
 `benfords_law.py` attempts to grab all the frequencies of the first digits in the step numbers and adds them to a histogram. For the first 100000 numbers, if you track the frequencies of the first digits of numbers in each step and draw a histogram we see a unique shape. 1 being the most frequent and 9 being the least frequent and there's an exponential curve in between. This curvature is more commonly known as Benford's Law and can be found in many use cases in our daily lives. *Sorry for the weird formatting! I couldn't figure out how to fix it...* <br>
 ![image](https://user-images.githubusercontent.com/47650058/206950303-edd5a2ba-06e4-458f-ab60-fcc2d77a09d0.png) <br>
 
-`delay_graph.py` graphs the relation between n (x-axis) and n's delay (y-axis). This relationship creates a weird graph which has no distinctive shape and we can't express their relation with just 1 simple math expression because of it's complexity.
+`delay_graph.py` graphs the relation between n (x-axis) and n's delay (y-axis). This relationship creates a weird graph which has no distinctive shape and we can't express their relation with just 1 simple math expression because of it's complexity. <br>
 ![image](https://user-images.githubusercontent.com/47650058/207048613-27a3a445-303c-4211-9a0e-596b62153d00.png)
 
-`glide_graph.py` graphs the relation between n (x-axis) and n's glide (y-axis). This relationship shows a very frequent pattern of occuring between powers of 2. A glide of 1 shows up for every even number since it's first move returns a step that is lower than itself, so it occurs every 2^1. Similarly, a glide value of 3 shows up in a pattern of every 2^2. A glide value of 6 shows up in a pattern that occurs every 2^4 and this pattern continues on forever with the glide values.
+`glide_graph.py` graphs the relation between n (x-axis) and n's glide (y-axis). This relationship shows a very frequent pattern of occuring between powers of 2. A glide of 1 shows up for every even number since it's first move returns a step that is lower than itself, so it occurs every 2^1. Similarly, a glide value of 3 shows up in a pattern of every 2^2. A glide value of 6 shows up in a pattern that occurs every 2^4 and this pattern continues on forever with the glide values. <br>
 ![image](https://user-images.githubusercontent.com/47650058/207049744-2e985e6e-e2a3-4d9f-be53-3e918eca870d.png)
 
 ### Glide Patterns
