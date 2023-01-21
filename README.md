@@ -10,7 +10,7 @@ PyPy is a python compiler which compiles the python scripts and runs the compile
 The simple piecewise function, caused such large commotion and has gone unsolved for over 8 decades. The simple 3x + 1 problem was rumored to be a Soviet trap designed to slow down American mathematics and science during the space race between the two nations. It was proven ot be effective because even after 8 decades, mathematicians are still working towards the problem by writing scripts to test numbers and catch any edge cases which break the conjecture.
 
 The piecewise function for the 3x+1 problem looks like this: <br>
-![image](https://user-images.githubusercontent.com/47650058/206938940-8da6ea25-0188-49b4-8b08-6e3061ecc753.png) <br>
+![collatz](https://user-images.githubusercontent.com/47650058/213839714-65a8a625-9bfb-4924-92df-64a67f2875a9.png) <br>
 *If x is even, `f(x) = x/2`, but if x is odd, `f(x) = 3x+1`. This function is infinitely recursed upon to form a sequence of numbers.*
 
 *For Example: <br>
